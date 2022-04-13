@@ -34,14 +34,40 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem "rack-cors"
+gem "rack-cors"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  # デバッグ用
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  # RSpecなど
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  # デバッグ用
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  # フォーマッター
+  gem 'rails_best_practices', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  # コンソールを見易く
+  gem 'awesome_print'
 end
+
+group :test do
+  gem 'capybara'
+  gem 'webdrivers'
+end
+
+# ログイン実装用
+gem 'sorcery'
+
