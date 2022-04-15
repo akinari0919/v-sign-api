@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_15_173746) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_15_175249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "sign_id", null: false
+    t.uuid "user_id", null: false
+    t.string "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sign_id"], name: "index_comments_on_sign_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "signs", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "image", null: false
+    t.integer "type", null: false
+    t.integer "angle", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_signs_on_user_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -26,4 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_173746) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "signs"
+  add_foreign_key "comments", "users"
+  add_foreign_key "signs", "users"
 end
