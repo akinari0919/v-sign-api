@@ -1,6 +1,6 @@
 class V1::SignsController < ApplicationController
   def index
-    render json: { status: 200, message: 'success' }
+    render json: { status: 200, signs: Sign.all, message: 'success' }
   end
 
   def create
