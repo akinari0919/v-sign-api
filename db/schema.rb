@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_15_175249) do
     t.string "name", null: false
     t.string "image", null: false
     t.integer "type", null: false
-    t.integer "angle", null: false
+    t.float "angle", null: false
     t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

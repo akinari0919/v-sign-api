@@ -1,6 +1,6 @@
 class V1::SignsController < ApplicationController
   def index
-    render json: { status: 200, signs: Sign.all, message: 'success' }
+    render json: { status: 200, signs: Sign.all.order(angle: :desc), message: 'success' }
   end
 
   def create
@@ -26,6 +26,6 @@ class V1::SignsController < ApplicationController
   private
 
   def sign_params
-    params.require(:sign).permit(:name)
+    params.require(:sign).permit(:name, :image, :angle, :type)
   end
 end

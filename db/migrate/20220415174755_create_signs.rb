@@ -4,7 +4,7 @@ class CreateSigns < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.string :image, null: false
       t.integer :type, null: false
-      t.integer :angle, null: false
+      t.float :angle, null: false
       t.references :user, foreign_key: true, type: :uuid
 
       t.timestamps
