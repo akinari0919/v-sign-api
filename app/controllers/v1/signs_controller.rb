@@ -7,7 +7,20 @@ class V1::SignsController < ApplicationController
     sign = Sign.new(sign_params)
 
     if sign.save
-      render json: { status: 200, sign: sign, message: 'success' }
+      ranking = Sign.all.order(angle: :desc)
+      ranking.each_with_index do |r, i|
+        if sign.id == r.id
+          @rank = i + 1
+        end
+      end
+      rankers = Sign.count
+      render json: {
+               status: 200,
+               sign: sign,
+               rank: @rank,
+               rankers: rankers,
+               message: 'success'
+             }
     else
       render json: { status: 500, sign: nil, message: sign.errors }
     end
@@ -28,4 +41,5 @@ class V1::SignsController < ApplicationController
   def sign_params
     params.require(:sign).permit(:name, :image, :angle, :type)
   end
+
 end
