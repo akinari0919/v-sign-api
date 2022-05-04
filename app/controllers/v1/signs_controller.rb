@@ -1,19 +1,28 @@
 class V1::SignsController < ApplicationController
   def index
-    render json: { status: 200, signs: Sign.all.order(angle: :desc), message: 'success' }
+    signs =  Sign.all.order(angle: :desc)
+    rankers = Sign.count
+
+    render json: {
+             status: 200,
+             signs: signs,
+             rankers: rankers,
+             message: 'success'
+           }
   end
 
   def create
     sign = Sign.new(sign_params)
 
     if sign.save
-      ranking = Sign.all.order(angle: :desc)
+      signs =  Sign.all.order(angle: :desc)
+      rankers = Sign.count
       ranking.each_with_index do |r, i|
         if sign.id == r.id
           @rank = i + 1
         end
       end
-      rankers = Sign.count
+
       render json: {
                status: 200,
                sign: sign,
@@ -22,7 +31,11 @@ class V1::SignsController < ApplicationController
                message: 'success'
              }
     else
-      render json: { status: 500, sign: nil, message: sign.errors }
+      render json: {
+               status: 500,
+               sign: nil,
+               message: sign.errors
+             }
     end
   end
 
@@ -30,9 +43,17 @@ class V1::SignsController < ApplicationController
     sign = Sign.find(params[:id])
 
     if sign.destroy
-      render json: { status: 200, sign: sign, message: 'success' }
+      render json: {
+               status: 200,
+               sign: sign,
+               message: 'success'
+             }
     else
-      render json: { status: 500, sign: nil, message: sign.errors }
+      render json: {
+               status: 500,
+               sign: nil,
+               message: sign.errors
+             }
     end
   end
 
