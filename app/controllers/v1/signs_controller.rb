@@ -15,7 +15,7 @@ class V1::SignsController < ApplicationController
     sign = Sign.new(sign_params)
 
     if sign.save
-      signs =  Sign.all.order(angle: :desc)
+      ranking =  Sign.all.order(angle: :desc)
       rankers = Sign.count
       ranking.each_with_index do |r, i|
         if sign.id == r.id
