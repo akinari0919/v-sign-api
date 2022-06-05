@@ -20,7 +20,7 @@ AllCops:
     - 'spec/**/*'
     - 'node_modules/**/*'
     - 'config.ru'
-    - 'lib/**'
+    - 'lib/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
@@ -65,7 +65,6 @@ Naming/AccessorMethodName:
 # 一行の長さは120字まで。コメントは制限しない
 Layout/LineLength:
   Max: 120
-  AllowedPatterns: ['\A#']
   Exclude:
     - "db/migrate/*.rb"
 
